@@ -34,3 +34,7 @@ best_model:
   flavor: mlflow.sklearn
   save_args:
     registered_model_name: titanic_best_model
+
+
+lr_metrics:
+  type: kedro_mlflow.io.metrics.MlflowMetricsHistoryDataset

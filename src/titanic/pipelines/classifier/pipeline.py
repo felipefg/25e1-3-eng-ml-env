@@ -55,4 +55,13 @@ def create_pipeline(**kwargs) -> Pipeline:
         #     outputs=None,
         #     tags=['report']
         # ),
+        node(
+            nodes.get_metrics,
+            inputs=[
+                'train',
+                'lr_model',
+            ],
+            outputs='lr_metrics',
+            tags=['report']
+        ),
     ])

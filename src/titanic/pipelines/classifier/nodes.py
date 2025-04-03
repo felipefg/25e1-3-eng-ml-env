@@ -4,6 +4,7 @@ generated using Kedro 0.19.11
 """
 import pandas as pd
 from pycaret.classification import ClassificationExperiment
+from sklearn.metrics import log_loss
 
 
 def prepare_data(raw_data):
@@ -50,3 +51,19 @@ def plot_roc(data, model, session_id, output_filename):
     exp.setup(data=data, target='Survived', session_id=session_id)
 
     exp.plot_model(model, plot='auc', save=output_filename)
+
+
+def get_metrics(data, model):
+
+    new_data = data.drop(columns=['Survived'])
+
+    y_data = model.predict_proba(new_data)
+
+    metrics_dict = {
+        "log_loss": log_loss(data['Survived'].values, y_data[:, 1])
+    }
+
+    return {
+        key: {'value': val, 'step': 1}
+        for key, val in metrics_dict.items()
+    }
