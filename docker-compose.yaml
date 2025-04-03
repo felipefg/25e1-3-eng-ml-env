@@ -8,3 +8,8 @@ services:
       - .:/workspace
 
     working_dir: /workspace
+
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+      - "8501:8501"
