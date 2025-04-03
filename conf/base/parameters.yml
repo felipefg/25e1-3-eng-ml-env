@@ -1,0 +1,4 @@
+session_id: 54321
+
+lr_model_roc_filename: data/08_reporting/lr_model
+best_model_roc_filename: data/08_reporting/best_model

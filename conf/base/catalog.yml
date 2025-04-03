@@ -1,0 +1,36 @@
+# Here you can define all your datasets by using simple YAML syntax.
+#
+# Documentation for this file format can be found in "The Data Catalog"
+# Link: https://docs.kedro.org/en/stable/data/data_catalog.html
+
+raw_train:
+  type: pandas.CSVDataset
+  filepath: data/01_raw/train.csv
+
+train:
+  type: pandas.ParquetDataset
+  filepath: data/04_feature/train.parquet
+
+# Para salvar localmente:
+# lr_model:
+#   type: pickle.PickleDataset
+#   filepath: data/06_models/lr_model.pickle
+#
+# best_model:
+#   type: pickle.PickleDataset
+#   filepath: data/06_models/best_model.pickle
+
+
+# Logando no MLFlow:
+lr_model:
+  type: kedro_mlflow.io.models.MlflowModelTrackingDataset
+  flavor: mlflow.sklearn
+  save_args:
+    registered_model_name: titanic_lr_model
+    #pyfunc_predict_fn: predict_proba
+
+best_model:
+  type: kedro_mlflow.io.models.MlflowModelTrackingDataset
+  flavor: mlflow.sklearn
+  save_args:
+    registered_model_name: titanic_best_model
